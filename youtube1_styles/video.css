@@ -1,0 +1,219 @@
+
+.video-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 16px;
+    row-gap: 25px;
+}
+@media (max-width : 750px) {
+    .video-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (min-width : 1000px) {
+    .video-grid {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+.thumbnail-image {
+    width: 100%;
+    border-radius: 2px;
+    margin-bottom: 6px;
+}
+.thumbnail-row {
+    position: relative;
+}
+.video-info-grid {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+}
+.channel-picture {
+    display: inline-block;
+    width: 36px;
+    vertical-align: top;
+    margin-top: 0px;
+}
+.profile-picture {
+    width: 100%;
+    border-radius: 18px;
+    vertical-align: top;
+    margin-right: 4px;
+}
+.video-info {
+    display: inline-block;
+    width: 250px;
+    margin-left: 5px;
+}
+.video-description {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 17px;
+    margin-bottom: 17px;
+    margin-top: 0px;
+}
+.video-author {
+    font-size: 14px;
+    color: rgb(96, 96, 96);
+    line-height: 12px;
+    margin-top: 0px;
+    margin-bottom: 13px;
+}
+.video-stats {
+    font-size: 14px;
+    color: rgb(96, 96, 96);
+    margin-top: 0px;
+    margin-bottom: 13px;
+}
+.thumbnail-image1 {
+    width: 100%;
+    border-radius: 2px;
+    margin-bottom: 6px;
+}
+.video-info-grid1 {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+}
+.channel-picture1 {
+    display: inline-block;
+    width: 36px;
+    vertical-align: top;
+    margin-top: 0px;
+}
+.profile-picture1 {
+    width: 100%;
+    border-radius: 18px;
+    vertical-align: top;
+    margin-right: 4px;
+}
+.video-info1 {
+    display: inline-block;
+    width: 250px;
+    margin-left: 5px;
+}
+.video-description1 {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 17px;
+    margin-bottom: 17px;
+    margin-top: 0px;
+}
+.video-author1 {
+    font-size: 14px;
+    color: rgb(96, 96, 96);
+    line-height: 12px;
+    margin-top: 0px;
+    margin-bottom: 13px;
+}
+.video-stats1 {
+    font-size: 14px;
+    color: rgb(96, 96, 96);
+    margin-top: 0px;
+    margin-bottom: 13px;
+}
+.thumbnail-image2 {
+    width: 100%;
+    border-radius: 2px;
+    margin-bottom: 6px;
+}
+.video-info-grid2 {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+}
+.channel-picture2 {
+    display: inline-block;
+    width: 36px;
+    vertical-align: top;
+    margin-top: 0px;
+}
+.profile-picture2 {
+    width: 100%;
+    border-radius: 18px;
+    vertical-align: top;
+    margin-right: 4px;
+}
+.video-info2 {
+    display: inline-block;
+    width: 250px;
+    margin-left: 5px;
+}
+.video-description2 {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 17px;
+    margin-bottom: 17px;
+    margin-top: 0px;
+}
+.video-author2 {
+    font-size: 14px;
+    color: rgb(96, 96, 96);
+    line-height: 12px;
+    margin-top: 0px;
+    margin-bottom: 13px;
+}
+.video-stats2 {
+    font-size: 14px;
+    color: rgb(96, 96, 96);
+    margin-top: 0px;
+    margin-bottom: 13px;
+}
+.thumbnail-image3 {
+    width: 100%;
+    border-radius: 2px;
+    margin-bottom: 6px;
+}
+.video-info-grid3 {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+}
+.channel-picture3 {
+    display: inline-block;
+    width: 36px;
+    vertical-align: top;
+    margin-top: 0px;
+}
+.profile-picture3 {
+    width: 100%;
+    border-radius: 18px;
+    vertical-align: top;
+    margin-right: 4px;
+}
+.video-info3 {
+    display: inline-block;
+    width: 250px;
+    margin-left: 5px;
+}
+.video-description3 {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 17px;
+    margin-bottom: 17px;
+    margin-top: 0px;
+}
+.video-author3 {
+    font-size: 14px;
+    color: rgb(96, 96, 96);
+    line-height: 12px;
+    margin-top: 0px;
+    margin-bottom: 13px;
+}
+.video-stats3 {
+    font-size: 14px;
+    color: rgb(96, 96, 96);
+    margin-top: 0px;
+    margin-bottom: 13px;
+}
+.video-time {
+    font-family: Roboto, Arial;
+    font-size: 12px;
+    font-weight: 500;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-radius: 2px;
+    background-color: black;
+    color: white;
+    position: absolute;
+    bottom: 15px;
+    right: 5px;
+}
