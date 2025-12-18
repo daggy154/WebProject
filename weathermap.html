@@ -81,6 +81,20 @@
             font-weight: bold;
             color: rgba(0, 0, 0, 0.75);
         }
+        @media (min-width: 600px) {
+            .weatherForm {
+                flex-direction: row;
+                max-width: 600px;
+            }
+            .cityInput {
+                margin-bottom: 0;
+                margin-right: 10px;
+                width: 300px;
+            }
+            button[type="submit"] {
+                width: auto;
+            }
+        }
     </style>
 </head>
 <body>
@@ -151,7 +165,7 @@
             const weatherEmoji = document.createElement("p");
 
             cityDisplay.textContent = city;
-            tempDisplay.textContent = `${((temp - 273.15) * (9 / 5) + 32).toFixed(1)}⁰F`;
+            tempDisplay.textContent = `${(temp - 273.15).toFixed(1)}⁰C`;
             humidityDisplay.textContent = `Humidity : ${humidity}%`;
             descDisplay.textContent = description;
             weatherEmoji.textContent = getWeatherEmoji(id);
@@ -204,4 +218,5 @@
         }
     </script>
 </body>
+
 </html>
