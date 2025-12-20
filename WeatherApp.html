@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .App {
+            width: 100%;
+            min-height: 100vh;
+            background-color: #082f92;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .weather-app {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            max-width: 350px;
+            min-height: 440px;
+            background-color: rgb(13, 3, 79);
+            text-align: center;
+            margin: 0px auto;
+            border-radius: 10px;
+            padding: 20px;
+            padding-bottom: 32px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .city-search {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .city {
+            width: 100%;
+            border: 2px solid rgb(204, 204, 204);
+            outline: none;
+            border-radius: 20px;
+            font-size: 16px;
+            background-color: #e5eef0;
+            padding: 10px 20px;
+            transition: width 0.4s ease-in-out;
+            color: #333;
+        }
+
+        .city:focus {
+            border-color: #6ffb7b;
+            box-shadow: 0 0 8px rgba(111, 251, 123, 0.5);
+        }
+
+        .city-name {
+            font-size: 1.2rem;
+            color: #6ffb7b;
+            margin: 15px 0px 8px 0px;
+        }
+
+        .date {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #b5b1b1;
+        }
+
+        .icon-temp {
+            display: flex;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #f0a7f0;
+            text-align: center;
+            align-items: center;
+        }
+
+        .deg {
+            font-size: 1.3rem;
+        }
+
+        .des-wind {
+            font-weight: 500;
+            color: #e1f36d;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        .des-wind .second-p {
+            margin-top: 10px;
+        }
+
+        .error-message {
+            text-align: center;
+            color: #e17a7a;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        /* Custom CSS Loader to replace Oval spinner */
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid green;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 480px) {
+            .weather-app { padding: 20px 15px; }
+            .icon-temp { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="App">
+        <div class="weather-app">
+            <div class="city-search">
+                <input type="text" id="city-input" class="city" placeholder="Enter City Name...">
+            </div>
+
+            <div id="loader" class="loader" style="display: none;"></div>
+
+            <div id="error-message" class="error-message" style="display: none;">
+                <span>City Not Found</span>
+            </div>
+
+            <div id="weather-content" style="display: none;">
+                <div class="city-name">
+                    <h2 id="display-city">City, <span>Country</span></h2>
+                </div>
+                <div class="date">
+                    <span id="display-date"></span>
+                </div>
+                <div class="icon-temp">
+                    <img id="weather-icon" src="" alt="icon" />
+                    <span id="display-temp">0</span>
+                    <sup class="deg">°C</sup>
+                </div>
+                <div class="des-wind">
+                    <p id="display-desc">DESCRIPTION</p>
+                    <p class="second-p">Wind Speed: <span id="display-wind">0</span> m/s</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const apiKey = 'c7f0933dd7fed678c6073cd3f2c1862f';
+        const cityInput = document.getElementById('city-input');
+        const loader = document.getElementById('loader');
+        const errorMessage = document.getElementById('error-message');
+        const weatherContent = document.getElementById('weather-content');
+
+        // Helper to format date
+        const toDate = () => {
+            const months = ["January", "February", "March", "April", "May", "June", 
+                            "July", "August", "September", "October", "November", "December"];
+            const currentDate = new Date();
+            return `${currentDate.getDate()} ${months[currentDate.getMonth()]}`;
+        };
+
+        cityInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                const city = cityInput.value;
+                fetchWeather(city);
+                cityInput.value = ''; // Clear input like in React code
+            }
+        });
+
+        async function fetchWeather(city) {
+            // Reset state
+            loader.style.display = 'block';
+            errorMessage.style.display = 'none';
+            weatherContent.style.display = 'none';
+
+            try {
+                const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`);
+                
+                if (!response.ok) throw new Error('Not Found');
+
+                const data = await response.json();
+                displayWeather(data);
+            } catch (err) {
+                loader.style.display = 'none';
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        function displayWeather(data) {
+            loader.style.display = 'none';
+            weatherContent.style.display = 'block';
+
+            document.getElementById('display-city').innerHTML = `${data.name}, <span>${data.sys.country}</span>`;
+            document.getElementById('display-date').innerText = toDate();
+            document.getElementById('weather-icon').src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+            
+            // Note: Using data.main.temp directly because 'units=metric' handles the conversion from Kelvin
+            document.getElementById('display-temp').innerText = Math.round(data.main.temp);
+            
+            document.getElementById('display-desc').innerText = data.weather[0].description.toUpperCase();
+            document.getElementById('display-wind').innerText = data.wind.speed;
+        }
+    </script>
+</body>
+</html>
