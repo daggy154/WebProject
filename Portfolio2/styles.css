@@ -231,12 +231,12 @@ h1 span:hover{
         gap: 2px;
     }
     .logo{
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
     .nav-bar a{
         font-size: 10px;
-        margin-left: 10px;
-        margin-right: 10px;
+        margin-left: 5px;
+        margin-right: 5px;
     }
     .home {
         flex-direction: column;
@@ -298,4 +298,5 @@ h1 span:hover{
     }
 
 }
+
 
