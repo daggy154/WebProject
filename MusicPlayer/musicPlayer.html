@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player Web Page</title>
+    <style>
+        body{
+            background: linear-gradient(120deg, #74ebd5, #ACB6E5);
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .music-container{
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            align-items: center;
+            width: 300px;
+        }
+        .music-buttons button{
+            font-size: 20px;
+            margin: 10px;
+            background: #74ebd5;
+            border: none;
+            border-radius: 50%;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .music-buttons button:hover{
+            background: #ACB6E5;
+        }
+        #progress{
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="music-container">
+        <h2>🎵 Music Player</h2>
+        <audio id="audio"></audio>
+
+        <div class="music-buttons">
+            <button id="prev">⏮</button>
+            <button id="play">▶️</button>
+            <button id="next">⏭</button>
+        </div>
+
+        <p id="title">No song playing...</p>
+        <input type="range" id="progress" value="0" step="1" min="0" max="100">
+    </div>
+    <script>
+        const songs = ["rhumba mix.mp3",
+                       "alliance.mp3",
+                       "afsana.mp3",
+                       "moyo machine.mp3",
+                       "mayday.mp3",
+                       "kwaheri.mp3",
+                       "yaya.mp3",
+                       "moho fire.mp3",
+                       "mix 2017.mp3"
+                    ];
+        let songIndex = 0;
+
+        const audio = document.getElementById('audio');
+        const playBtn = document.getElementById('play');
+        const nextBtn = document.getElementById('next');
+        const prevBtn = document.getElementById('prev');
+        const progress = document.getElementById('progress');
+        const title = document.getElementById('title');
+
+        function loadSong(index){
+            audio.src = songs[index];
+            title.textContent = songs[index];
+        }
+
+        function playSong(){
+            audio.play();
+            playBtn.textContent = "⏸";
+        }
+
+        function pauseSong(){
+            audio.pause();
+            playBtn.textContent = "▶";
+        }
+
+        playBtn.addEventListener("click", () => {
+            if(audio.pause){
+                playSong();
+            }
+            else{
+                pauseSong();
+            }
+        });
+
+        nextBtn.addEventListener("click", () => {
+            songIndex = (songIndex + 1) % songs.length;
+            loadSong(songIndex);
+            playSong();
+        });
+
+        prevBtn.addEventListener("click", () => {
+            songIndex = (songIndex - 1 + songs.length) % songs.length;
+            loadSong(songIndex);
+            playSong();
+        });
+
+        audio.addEventListener("timeupdate", () => {
+            if(audio.duration){
+                progress.value = (audio.currentTime / audio.duration) * 100;
+            }
+        });
+
+        progress.addEventListener("input", () => {
+            audio.currentTime = (progress.value / 100) * audio.duration;
+        });
+
+        loadSong(songIndex);
+    </script>
+</body>
+</html>
