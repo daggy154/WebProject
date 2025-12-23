@@ -231,7 +231,7 @@ h1 span:hover{
         gap: 2px;
     }
     .logo{
-        font-size: 1.2rem;
+        font-size: 1.0rem;
     }
     .nav-bar a{
         font-size: 12px;
@@ -333,3 +333,4 @@ h1 span:hover{
     }
 
 }
+
