@@ -231,7 +231,7 @@ h1 span:hover{
         gap: 2px;
     }
     .logo{
-        font-size: 1.2rem;
+        font-size: 1.4rem;
     }
     .nav-bar a{
         font-size: 10px;
@@ -243,7 +243,7 @@ h1 span:hover{
         justify-content: center;
         text-align: center;
         height: auto;
-        padding-top: 160px;
+        padding-top: 120px;
     }
     .home-content{
         order: 1;
@@ -298,6 +298,7 @@ h1 span:hover{
     }
 
 }
+
 
 
 
