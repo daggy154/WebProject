@@ -243,7 +243,7 @@ h1 span:hover{
         justify-content: center;
         text-align: center;
         height: auto;
-        padding-top: 100px;
+        padding-top: 120px;
     }
     .home-content{
         order: 1;
@@ -298,5 +298,6 @@ h1 span:hover{
     }
 
 }
+
 
 
