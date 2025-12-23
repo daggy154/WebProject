@@ -231,7 +231,7 @@ h1 span:hover{
         gap: 2px;
     }
     .nav-bar a{
-        font-size: 14px;
+        font-size: 10px;
         margin-left: 10px;
         margin-right: 10px;
     }
@@ -293,4 +293,5 @@ h1 span:hover{
         margin-left: 8px;
         margin-right: 8px;
     }
+
 }
