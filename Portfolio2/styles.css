@@ -192,6 +192,16 @@ h1 span:hover{
 .skill-item span{
     font-weight: 600;
 }
+.projects{
+    padding: 100px 10%;
+    position: relative;
+    width: 100%;
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
 .projects h2{
     font-size: 2.0rem;
     color: hsl(120, 87%, 32%);
@@ -592,3 +602,4 @@ h1 span:hover{
     }
 
 }
+
