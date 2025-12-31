@@ -109,8 +109,7 @@ body{
 }
 #restaurant{
     position: relative;
-    padding: 100px 0;
-    border: 1px solid black;
+    padding: 100px 2%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -300,4 +299,5 @@ body{
         opacity: 1;
         transform: translateX(0);
     }
+
 }
