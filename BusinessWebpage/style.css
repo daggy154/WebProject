@@ -206,8 +206,11 @@ body{
     .info-box p{
         font-size: .8rem;
     }
-    #restaurant, #barber{
+    #restaurant{
         padding: 50px 2%;
+    }
+    #barber{
+        padding: 75px 2%;
     }
     .restaurant-container h2, .barber-container h2{
         font-size: 1.1rem;
@@ -314,4 +317,5 @@ body{
         opacity: 1;
         transform: translateX(0);
     }
+
 }
