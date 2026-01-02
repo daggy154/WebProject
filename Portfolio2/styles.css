@@ -530,8 +530,8 @@ h1 span:hover{
     }
 
     .projects-container img {
-        width: 250px;     /* Makes images responsive */
-        height: 300px;    /* Maintains aspect ratio */
+        width: 100%;     /* Makes images responsive */
+        height: auto;    /* Maintains aspect ratio */
         max-width: 350px; /* Prevents images from getting too huge on larger phones */
     }
 
@@ -600,4 +600,5 @@ h1 span:hover{
         margin-left: 8px;
         margin-right: 8px;
     }
+
 }
