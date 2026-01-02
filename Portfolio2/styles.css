@@ -525,6 +525,7 @@ h1 span:hover{
     .clock-container, 
     .calculator-container {
         width: 90%; /* Give it some breathing room on the sides */
+        height: 90%;
         margin: 0 auto;
         padding: 25px;
     }
@@ -602,4 +603,5 @@ h1 span:hover{
     }
 
 }
+
 
