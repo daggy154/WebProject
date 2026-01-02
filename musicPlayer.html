@@ -3,124 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Player Web Page</title>
+    <title>My Local Player</title>
     <style>
-        body{
-            background: linear-gradient(120deg, #74ebd5, #ACB6E5);
-            font-family: Arial, sans-serif;
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #121212;
+            color: white;
             display: flex;
-            align-items: center;
             justify-content: center;
-            height: 100vh;
-        }
-        .music-container{
-            background: white;
             padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-            align-items: center;
-            width: 300px;
         }
-        .music-buttons button{
-            font-size: 20px;
-            margin: 10px;
-            background: #74ebd5;
-            border: none;
-            border-radius: 50%;
-            padding: 10px 15px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .music-buttons button:hover{
-            background: #ACB6E5;
-        }
-        #progress{
+
+        .player-container {
             width: 100%;
-            margin-top: 10px;
+            max-width: 500px; /* Limits width on desktop */
+            background: #757272;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        /* Hide default file input and style the label */
+        #file-input { display: none; }
+        .custom-file-upload {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #1db954; /* Spotify Green */
+            border-radius: 20px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        audio {
+            width: 100%; /* Makes player responsive */
+            margin-top: 20px;
+        }
+
+        #playlist {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+            text-align: left;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        #playlist li {
+            padding: 10px;
+            border-bottom: 1px solid #333;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* Responsive adjustments for small screens */
+        @media (max-width: 768px) {
+            .player-container {
+                padding: 5px;
+                max-width: 350px;
+            }
+            .custom-file-upload{
+                padding: 5px 10px;
+                margin-bottom: 10px;
+            }
+            audio{
+                margin-top: 10px;
+            }
+            #playlist{
+                margin-top: 10px;
+            }
+            h1 { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
-    <div class="music-container">
-        <h2>🎵 Music Player</h2>
-        <audio id="audio"></audio>
 
-        <div class="music-buttons">
-            <button id="prev">⏮</button>
-            <button id="play">▶️</button>
-            <button id="next">⏭</button>
+    <div class="player-container">
+        <h1>Music Player</h1>
+        
+        <input type="file" id="file-input" accept="audio/*" multiple>
+        <label for="file-input" class="custom-file-upload">📂 Select Songs</label>
+
+        <div class="now-playing">
+            <h2 id="track-name">No song selected</h2>
         </div>
 
-        <p id="title">No song playing...</p>
-        <input type="range" id="progress" value="0" step="1" min="0" max="100">
+        <audio id="audio-player" controls></audio>
+
+        <ul id="playlist"></ul>
     </div>
+
     <script>
-        const songs = ["rhumba mix.mp3",
-                       "alliance.mp3",
-                       "afsana.mp3",
-                       "moyo machine.mp3",
-                       "mayday.mp3",
-                       "kwaheri.mp3",
-                       "yaya.mp3",
-                       "moho fire.mp3",
-                       "mix 2017.mp3"
-                    ];
-        let songIndex = 0;
+        const fileInput = document.getElementById('file-input');
+        const audioPlayer = document.getElementById('audio-player');
+        const playlist = document.getElementById('playlist');
+        const trackName = document.getElementById('track-name');
 
-        const audio = document.getElementById('audio');
-        const playBtn = document.getElementById('play');
-        const nextBtn = document.getElementById('next');
-        const prevBtn = document.getElementById('prev');
-        const progress = document.getElementById('progress');
-        const title = document.getElementById('title');
+        let songs = [];
 
-        function loadSong(index){
-            audio.src = songs[index];
-            title.textContent = songs[index];
+        fileInput.addEventListener('change', (e) => {
+            const files = e.target.files;
+            playlist.innerHTML = ''; // Clear old list
+            songs = Array.from(files);
+
+            songs.forEach((file, index) => {
+                const li = document.createElement('li');
+                li.textContent = file.name;
+                li.onclick = () => playSong(index);
+                playlist.appendChild(li);
+            });
+
+            if (songs.length > 0) playSong(0); // Play first song automatically
+        });
+
+        function playSong(index) {
+            const file = songs[index];
+            const url = URL.createObjectURL(file);
+            
+            audioPlayer.src = url;
+            trackName.textContent = "Song selected";
+            audioPlayer.play();
         }
-
-        function playSong(){
-            audio.play();
-            playBtn.textContent = "⏸";
-        }
-
-        function pauseSong(){
-            audio.pause();
-            playBtn.textContent = "▶";
-        }
-
-        playBtn.addEventListener("click", () => {
-            if(audio.pause){
-                playSong();
-            }
-            else{
-                pauseSong();
-            }
-        });
-
-        nextBtn.addEventListener("click", () => {
-            songIndex = (songIndex + 1) % songs.length;
-            loadSong(songIndex);
-            playSong();
-        });
-
-        prevBtn.addEventListener("click", () => {
-            songIndex = (songIndex - 1 + songs.length) % songs.length;
-            loadSong(songIndex);
-            playSong();
-        });
-
-        audio.addEventListener("timeupdate", () => {
-            if(audio.duration){
-                progress.value = (audio.currentTime / audio.duration) * 100;
-            }
-        });
-
-        progress.addEventListener("input", () => {
-            audio.currentTime = (progress.value / 100) * audio.duration;
-        });
-
-        loadSong(songIndex);
     </script>
 </body>
 </html>
